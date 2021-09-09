@@ -1,0 +1,83 @@
+#:kivy 2.0.0
+#:import utils kivy.utils
+
+<Form>:
+    orientation: 'vertical'
+    pos_hint:{"center_x":.2,"center_y":0.5}
+    spacing: 10
+    size_hint: .3, None
+    padding: 20
+
+    MDTextField:
+        id: details
+        multiline:False
+        mode: "rectangle"
+        hint_text: "Details"
+        on_text: root.change_text("details")
+
+    MDTextField:
+        id: state
+        mode: "rectangle"
+        hint_text: "State"
+        on_text: root.change_text("state")
+
+<MainCard>:
+    id: main_card
+    size_hint: None, None
+    size: "260dp", "140dp"
+    pos_hint: {"center_x": .6, "center_y": .5}
+    padding: 10,10,10,10
+    orientation: "vertical"
+    spacing: 10
+
+    MDLabel:
+        text: "PLAYING A GAME"
+        bold: True
+        adaptive_height: True
+        font_size: "10sp"
+
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: "10dp"
+
+        
+        Image:
+            source: "download.jpg"
+            pos_hint: {"top": 1}
+            size: "50dp", "50dp"
+            size_hint: None, None
+            allow_stretch: True
+            keep_ratio: False
+
+        BoxLayout:
+            orientation: "vertical"
+            
+            MDLabel:
+                id: name
+                text: root.data["name"]
+                adaptive_height: True
+                bold: True
+                font_size: "11sp"
+
+            MDLabel:
+                id: details
+                text: root.data["details"]
+                font_size: "10sp"
+            MDLabel:
+                id: state
+                text: root.data["state"]
+                font_size: "10sp"
+            MDLabel:
+            
+    MainButton:
+
+        
+<MainButton>:
+    text: "Why are we here?"
+    font_size: "11sp"
+    font_name: "fonts/Roboto-Regular.ttf"
+    weight: "bold"
+    pos_hint: {"top":1}
+    size_hint: 1, None
+    md_bg_color: utils.get_color_from_hex("#4f545c")
+    md_radius: "7dp"
