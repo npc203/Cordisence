@@ -2,30 +2,28 @@
 #:import utils kivy.utils
 
 <Form>:
-    orientation: 'vertical'
-    pos_hint:{"center_x":.2,"center_y":0.5}
-    spacing: 10
-    size_hint: .3, None
-    padding: 20
+    pos_hint:{"center_x":.3,"center_y":.4}
+    size_hint: .5, None
+    spacing: 40
+
+<ConnectCard>:
+    orientation:"vertical"
+    spacing:35
+    style:"outlined"
 
     MDTextField:
-        id: details
-        multiline:False
-        mode: "rectangle"
-        hint_text: "Details"
-        on_text: root.change_text("details")
-
-    MDTextField:
-        id: state
-        mode: "rectangle"
-        hint_text: "State"
-        on_text: root.change_text("state")
+        id:client_id
+        mode:"rectangle"
+        hint_text: "Client ID"
+    MDRaisedButton:
+        text: "Connect"
+        on_release: root.connect()
 
 <MainCard>:
     id: main_card
     size_hint: None, None
     size: "260dp", "140dp"
-    pos_hint: {"center_x": .6, "center_y": .5}
+    pos_hint: {"center_x": .75, "center_y": .7}
     padding: 10,10,10,10
     orientation: "vertical"
     spacing: 10
@@ -71,6 +69,11 @@
             
     MainButton:
 
+<ButtonBar>:
+    pos_hint:{"x":.1,"y":.1}
+    spacing: 10
+    size_hint: .3, None
+    padding: 20
         
 <MainButton>:
     text: "Why are we here?"
