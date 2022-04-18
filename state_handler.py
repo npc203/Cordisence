@@ -7,25 +7,29 @@ from typing import List, Optional
 @dataclass
 class Template:
     client_id: int
-    state: str
-    details: str
-    large_image: str
-    large_text: str
-    small_image: str
-    small_text: str
-    buttons: dict = field(default_factory=dict)
+    state: Optional[str] = None
+    details: Optional[str] = None
+    large_image: Optional[str] = None
+    large_text: Optional[str] = None
+    small_image: Optional[str] = None
+    small_text: Optional[str] = None
+    buttons: list = field(default_factory=list)
 
     @property
     def data(self):
-        return {
-            "state": self.state,
-            "details": self.details,
-            "large_image": self.large_image,
-            "large_text": self.large_text,
-            "small_image": self.small_image,
-            "small_text": self.small_text,
-            "buttons": self.buttons,
-        }
+        final_dict = {}
+        for key in (
+            "state",
+            "details",
+            "large_image",
+            "large_text",
+            "small_image",
+            "small_text",
+            "buttons",
+        ):
+            if value := getattr(self, key):
+                final_dict[key] = value
+        return final_dict
 
 
 class StateHandler:

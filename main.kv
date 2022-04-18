@@ -2,28 +2,52 @@
 #:import utils kivy.utils
 
 <Form>:
+    id: form
     pos_hint:{"center_x":.3,"center_y":.4}
     size_hint: .5, None
     spacing: 40
 
 <ConnectCard>:
     orientation:"vertical"
-    spacing:35
-    style:"outlined"
+    size_hint:1,None
+    spacing:10
+
+    canvas.before:
+        Color:
+            rgba: 1, .5, .5, 1
+        Line:
+            width: 1
+            rectangle: self.x-20, self.y-20, self.width+40, self.height+40
 
     MDTextField:
         id:client_id
         mode:"rectangle"
         hint_text: "Client ID"
-    MDRaisedButton:
-        text: "Connect"
-        on_release: root.connect()
+    
+    BoxLayout:
+        size_hint:1,1
+        MDLabel:
+            text:"Status:"
+            font_size: "14sp"
+
+        MDIconButton:
+            id:status_icon
+            padding: (0,10,0,0)
+            icon_size: "20sp"
+            icon: "checkbox-blank-circle"
+            theme_icon_color  : "custom"
+            icon_color: utils.get_color_from_hex("#FFA000")
+           
+        
+        MDRaisedButton:
+            text: "Connect"
+            on_release: root.connect()
 
 <MainCard>:
     id: main_card
     size_hint: None, None
-    size: "260dp", "140dp"
-    pos_hint: {"center_x": .75, "center_y": .7}
+    size: "260dp", "100dp"
+    pos_hint: {"center_x": .75, "center_y": .65}
     padding: 10,10,10,10
     orientation: "vertical"
     spacing: 10
@@ -39,8 +63,9 @@
         spacing: "10dp"
 
         
-        Image:
-            source: "download.jpg"
+        AsyncImage:
+            id: large_image
+            source: ""
             pos_hint: {"top": 1}
             size: "50dp", "50dp"
             size_hint: None, None
@@ -65,18 +90,15 @@
                 id: state
                 text: root.data["state"]
                 font_size: "10sp"
-            MDLabel:
-            
-    MainButton:
+
 
 <ButtonBar>:
-    pos_hint:{"x":.1,"y":.1}
+    pos_hint:{"x":0.02,"y":.18}
     spacing: 10
     size_hint: .3, None
     padding: 20
         
 <MainButton>:
-    text: "Why are we here?"
     font_size: "11sp"
     font_name: "fonts/Roboto-Regular.ttf"
     weight: "bold"
@@ -84,3 +106,29 @@
     size_hint: 1, None
     md_bg_color: utils.get_color_from_hex("#4f545c")
     md_radius: "7dp"
+
+<PopupContent>:
+    orientation: "vertical"
+    spacing: 20
+
+    MDTextField:
+        id: label
+        hint_text: "Label"
+        mode:"rectangle"
+        pos_hint: {"center_x":.5}
+        size_hint: .7,None
+ 
+    MDTextField:
+        id: url
+        hint_text: "url"
+        mode:"rectangle"
+        pos_hint: {"center_x":.5}
+        size_hint: .7,None
+    
+    BoxLayout:
+        id:bar
+        spacing: 10
+        MDRaisedButton:
+            id: add_button
+            text: "Add"
+   
